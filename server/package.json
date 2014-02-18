@@ -1,0 +1,30 @@
+{
+  "name": "js-dont-have-to-suck",
+  "version": "0.0.0",
+  "description": "Talk/workshop on js from front-to-back",
+  "main": "main.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/fritzvd/js-dont-have-to-suck"
+  },
+  "keywords": [
+    "js",
+    "node",
+    "npm",
+    "angular",
+    "restful"
+  ],
+  "author": "fritzvd",
+  "license": "WTFPL",
+  "bugs": {
+    "url": "https://github.com/fritzvd/js-dont-have-to-suck/issues"
+  },
+  "homepage": "https://github.com/fritzvd/js-dont-have-to-suck",
+  "dependencies": {
+    "pg": "~2.11.1",
+    "restify": "~2.6.1"
+  }
+}

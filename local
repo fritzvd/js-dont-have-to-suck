@@ -1,0 +1,14 @@
+# Rename this file to local.
+
+# For provisioning of a local vagrant box, fill in your box's ip
+# address and home dir below, and run:
+
+# $ ansible-playbook -i local provision.yml
+
+# This will install a postgresql and a redis server on your box.
+# vm=true makes sure ufw firewall rules are not set.
+
+vagrant vm=true ansible_ssh_user=vagrant ansible_ssh_host=10.0.3.10 ansible_ssh_private_key_file=~/.vagrant.d/insecure_private_key
+
+[postgres]
+vagrant 
