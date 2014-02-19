@@ -13,7 +13,7 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   config.vm.box = "precise64"
 
   config.vm.provision :ansible do |ansible|
-    ansible.playbook = "../../nxt/3di/inframan/ansible/provision.yml"
+    ansible.playbook = "./inframan/ansible/provision.yml"
     ansible.inventory_path = "./local"
   end
 

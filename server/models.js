@@ -1,6 +1,6 @@
 // models.js
 var Sequelize = require('sequelize');
-var sequelize = new Sequelize('newdb', 'user', 'user', {
+var sequelize = new Sequelize('newdb', 'fritz', 'fritz', {
 	dialect: 'postgres',
 	port: 5432
 });

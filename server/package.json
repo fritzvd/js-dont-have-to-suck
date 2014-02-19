@@ -25,6 +25,7 @@
   "homepage": "https://github.com/fritzvd/js-dont-have-to-suck",
   "dependencies": {
     "pg": "~2.11.1",
-    "restify": "~2.6.1"
+    "restify": "~2.6.1",
+    "sequelize": "~1.7.0-rc6"
   }
 }
