@@ -10,6 +10,14 @@ var user = sequelize.define('User', {
 	password: Sequelize.STRING
 });
 
+var bill = sequelize.define('Bill',{
+	timestamp: Sequelize.DATE,
+	novat: Sequelize.FLOAT(11)
+});
+
+user.hasMany(bill);
+bill.belongsTo(user);
+
 module.exports = {
 	user: user,
 	db: sequelize

@@ -2,18 +2,36 @@ var restify = require('restify');
 var models = require('./models');
 
 function respond(req, res, next) {
-	// console.info('user', models.user.get(1));
-	models.user.find({where: {username: 'henk'}})
+	var user;
+	models[req.params.table].find(req.params.id)
 		.complete(function (err, user) {
-			console.info(err, user);
+			user = user;
+			res.send(user.username);
 		});
-	user = models[req.params.table].find({ where: {id: req.params.id}});
-	res.send(user);
+}
+
+function respondList (req, res, next) {
+	var list;
+	models[req.params.table].findAll()
+		.success(function (list) {
+			list = list;
+			res.send(list);
+		});
+}
+
+function insert (req, res, next) {
+	// assert.ifError(err);
+	console.info(req)
+	models[req.params.table].define();
+	res.send(201, 'Dank U');
 }
 
 var server = restify.createServer();
+server.get('/:table/', respondList);
+
 server.get('/:table/:id', respond);
 server.head('/:table/:id', respond);
+server.post('/:table/create', insert);
 
 server.listen(3000, function () {
 	console.info('servertje %s op %s', server.name, server.url);
