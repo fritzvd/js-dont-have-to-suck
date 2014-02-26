@@ -6,6 +6,7 @@ function respond(req, res, next) {
 	models[req.params.table].find(req.params.id)
 		.complete(function (err, user) {
 			user = user;
+			console.info(user);
 			res.send(user.username);
 		});
 }

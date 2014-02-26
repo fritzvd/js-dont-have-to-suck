@@ -1,0 +1,22 @@
+{
+  "name": "client",
+  "version": "0.0.0",
+  "description": "client for api for talk",
+  "main": "index.html",
+  "authors": [
+    "fritzvd"
+  ],
+  "license": "MIT",
+  "homepage": "github.com/fritzvd",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "app/bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "reveal.js": "~2.6.1"
+  }
+}
