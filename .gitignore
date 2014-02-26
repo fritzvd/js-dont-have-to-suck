@@ -1,5 +1,5 @@
 .vagrant/
 node_modules/
-bower_modules/
+inframan
 npm-debug.log
 
