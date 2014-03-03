@@ -1,6 +1,6 @@
 var models = require('./models');
 
-models.db.sync({force: 	true})
+models.db.sync()
 	.complete(function (error) {
 		if (!!error) {
 			console.log('An error occured:', error);
