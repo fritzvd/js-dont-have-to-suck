@@ -1,0 +1,27 @@
+{
+  "name": "client",
+  "version": "0.0.0",
+  "homepage": "https://github.com/fritzvd/js-dont-have-to-suck",
+  "description": "client for example app build in a workshop",
+  "main": "index.html",
+  "keywords": [
+    "billing",
+    "app"
+  ],
+  "authors": [
+    "fritzvd"
+  ],
+  "license": "MIT",
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "angular": "~1.2.14",
+    "bootstrap": "~3.1.1"
+  }
+}

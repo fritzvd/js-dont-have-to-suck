@@ -12,13 +12,14 @@ var user = sequelize.define('User', {
 
 var bill = sequelize.define('Bill',{
 	timestamp: Sequelize.DATE,
-	novat: Sequelize.FLOAT(11)
+	price: Sequelize.FLOAT(11)
 });
 
 user.hasMany(bill);
-bill.belongsTo(user);
+bill.hasMany(user);
 
 module.exports = {
 	user: user,
+	bill: bill,
 	db: sequelize
 };

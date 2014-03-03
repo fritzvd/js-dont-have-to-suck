@@ -5,9 +5,13 @@ function respond(req, res, next) {
 	var user;
 	models[req.params.table].find(req.params.id)
 		.complete(function (err, user) {
+			var result = '';
 			user = user;
-			console.info(user);
-			res.send(user.username);
+			user.getBills().success(function (bills) {
+				user.values.bills = bills;
+				// console.info(user.values, bills);
+				res.send(user);
+			});
 		});
 }
 
