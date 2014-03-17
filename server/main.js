@@ -1,4 +1,5 @@
 var restify = require('restify');
+// var restify = require('node-static');
 var models = require('./models');
 
 function respond(req, res, next) {
@@ -32,6 +33,13 @@ function insert (req, res, next) {
 }
 
 var server = restify.createServer();
+server.use(
+  function crossOrigin(req,res,next){
+    res.header("Access-Control-Allow-Origin", "*");
+    res.header("Access-Control-Allow-Headers", "X-Requested-With");
+    return next();
+  }
+);
 server.get('/:table/', respondList);
 
 server.get('/:table/:id', respond);
