@@ -82,7 +82,9 @@
         <section>
           <h3>Talk is cheap, show me the code</h3>
 
-          <pre><code class="bash">## PRO TIP: vagrant
+          <pre><code class="bash">## PRO TIP 0: vagrant up --provider=lxc 
+## PRO TIP 1: Inframan + ansible provisioning 
+#  --> https://github.com/nens/inframan          
 ## PRO TIP 2: Nieuw N&S beleid. Wie Daniel vraagt krijgt een SSD. :) 
 vagrant up
           </code></pre>
@@ -91,7 +93,7 @@ vagrant up
         <section>
           <h3>We need an API/backend</h3>
           <span>We run the</span>
-          <pre><code class="bash"># This is similar to python setup.py install bin/buildout
+          <pre class="fragment" ><code class="bash"># This is similar to python setup.py install bin/buildout
 npm install
 # To install a package
 npm install restify
@@ -102,8 +104,8 @@ npm install --save sequelize
 ### (package.json > devDependencies)
 npm install --save-dev grunt
           </code></pre>
-          <pre><code class="js">var server = require('restify');</code></pre>
-          <pre><code class="python">import restapilibrary as server</code></pre>
+          <pre class="fragment"><code class="js">var server = require('restify');</code></pre>
+          <pre class="fragment"><code class="python">import restapilibrary as server</code></pre>
         </section>
         <section>
         <p class="gatsby">The end. Thank you.</p>
@@ -122,6 +124,7 @@ npm install --save-dev grunt
         progress: true,
         history: true,
         center: true,
+        fragments: true,
 
         theme: Reveal.getQueryHash().theme, // available themes are in /css/theme
         transition: Reveal.getQueryHash().transition || 'default', // default/cube/page/concave/zoom/linear/fade/none
