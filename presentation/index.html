@@ -210,6 +210,9 @@ app.controller('FabulousController', function ($scope, Restangular) {
   &lt;p&gt;&#123;&#123; user.username &#125;&#125;  - &#123;&#123; user.id &#125;&#125;&lt;/p&gt;
 &lt;/span&gt;
   </code></pre>
+    <span ng-repeat="user in users">
+    <p>{{ user.username }} - {{user.id}}</p>
+  </span>
         </section>
         <section>
           <p class="gatsby">The end. Thank you.</p>
