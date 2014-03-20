@@ -17,6 +17,7 @@
     "tests"
   ],
   "dependencies": {
-    "reveal.js": "~2.6.1"
+    "reveal.js": "~2.6.1",
+    "angular": "~1.2.14"
   }
 }

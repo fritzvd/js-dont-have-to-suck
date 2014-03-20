@@ -1,5 +1,5 @@
 <!DOCTYPE HTML>
-<html lang="en">
+<html lang="en" ng-app="thisWonderfulAppieApp">
   <head>
     <title>JS don't have to suck</title>
     <meta name="description" content="A framework for easily creating beautiful presentations using HTML">
@@ -47,7 +47,7 @@
           <section>
             <h1>NPM</h1>
             <h5>node package manager (both front and backend)</h5>
-            <img src="http://npm.org/images/logo.svg" />
+            <img src="https://www.npmjs.org/static/npm.png" />
           </section>
           <section>
             <h1>Grunt.js</h1>
@@ -57,7 +57,7 @@
           <section>
             <h1>Bower.js</h1>
             <h5>package manager for front end libraries</h5>
-            <img src="http://bower.com/img/grunt-logo.svg" />
+            <img src="http://bower.io/img/bower-logo.png" />
           </section>
         </section>
         <section>
@@ -80,6 +80,24 @@
           Test both back and front end.
         </section>
         <section>
+          <h3>Node API backend</h3>
+          <pre class="fragment" ><code class="bash"># This is similar to python setup.py install bin/buildout
+npm install
+# To install a package
+npm install express
+## To install and add a package to the requirements 
+## (package.json > dependencies)
+npm install --save sequelize
+### To install and add a package to the development requirements 
+### (package.json > devDependencies)
+npm install --save-dev grunt
+#### or globally
+sudo npm -g install grunt-cli
+          </code></pre>
+          <pre class="fragment"><code class="python">import restapilibrary as server</code></pre>
+          <pre class="fragment"><code class="javascript">var server = require('restify');</code></pre>
+        </section>
+        <section>
           <h3>Talk is cheap, show me the code</h3>
 
           <pre><code class="bash">## PRO TIP 0: vagrant up --provider=lxc 
@@ -88,34 +106,120 @@
 ## PRO TIP 2: Nieuw N&S beleid. Wie Daniel vraagt krijgt een SSD. :) 
 vagrant up
           </code></pre>
-          <pre><code class="bash">createdb jstutorial</code></pre>
+          <pre><code class="bash">createdb jstutorial -O wiedanook</code></pre>
         </section>
         <section>
-          <h3>We need an API/backend</h3>
-          <span>We run the</span>
-          <pre class="fragment" ><code class="bash"># This is similar to python setup.py install bin/buildout
+          <h3>run the sucker</h3>
+          <pre><code class="bash">### install and setup
 npm install
-# To install a package
-npm install restify
-## To install and add a package to the requirements 
-## (package.json > dependencies)
-npm install --save sequelize
-### To install and add a package to the development requirements 
-### (package.json > devDependencies)
-npm install --save-dev grunt
-          </code></pre>
-          <pre class="fragment"><code class="js">var server = require('restify');</code></pre>
-          <pre class="fragment"><code class="python">import restapilibrary as server</code></pre>
+node sync
+node fixture
+node server
+curl http://localhost:3000/api/user
+</code></pre>
+        </section>
+
+
+        <section>
+          <h1>front-end</h1>
+            <pre><code class="bash">sudo npm -g install bower
+cd client/
+bower install
+## to add stuff to bower.json
+bower install --save openlayers</code></pre>
         </section>
         <section>
-        <p class="gatsby">The end. Thank you.</p>
-        <!-- <img src="/app/assets/img/greatgatsby.gif" /> -->
+          <h2>Angular JS</h2>
+            <a href="http://angularjs.org">angular</a>
+            <pre><code class="python">import requests
+requests.get('bla')</code></pre>
+            <pre class="fragment"><code class="javascript">function Ctrl($http) {
+  $http.get('bla');
+}</code></pre>
+            <span class="fragment">Hold up. Are you saying it does not explicitly mention imports</span>
+            <div class="fragment">
+              <img src="assets/img/chestbeat.gif" />
+            </div>
+        </section>
+        <section>
+          <h2>Dependency Injection</h2>
+          <p>string matched dependencies through Angular internals.</p>
+          <pre class="fragment"><code class="javascript">
+// instantiate your app based on a string and add dependencies
+// dependencies are strings in a list. 
+var app = angular.module('thisWonderfulAppieApp', ['restangular']);
+
+// or if rather start without dependencies.
+var app = angular.module('thisWonderfulAppieApp', []);
+
+app.controller('FabulousController', function ($scope) {
+  $scope.datamodel = {
+    example: 'data'
+  };
+});</code></pre>
+          <pre class="fragment"><code class="html">
+&lt;div ng-controller="FabulousController"&gt;
+  &cb;{{ datamodel.example }}
+&lt;/div&gt;
+</code></pre>
+        </section>
+        <section>
+          <h2>Data binding</h2>
+          <pre><code class="html">
+&lt;div ng-controller="FabulousController"&gt;
+  {{ datamodel.example }}
+  <!-- we tell angular which data model should be used for the input -->
+  &lt;input type="text" ng-model="datamodel.example" /&gt;
+&lt;/div&gt;
+</code></pre>
+<div class="fragment" ng-controller="FabulousController">
+  <p>{{ datamodel.example }}</p>
+  <!-- we tell angular which data model should be used for the input -->
+  <input type="text" ng-model="datamodel.example" />
+  <p class="fragment">{{ datamodel.example | uppercase}}</p>
+</div>
+        </section>
+        <section>
+          <h2>Hookup the API</h2>
+          <pre><code class="bash">bower install --save restangular</code></pre>
+          <pre><code class="javascript">
+var app = angular.module('thisWonderfulAppieApp', ['restangular']);
+// why this is a capital R and lowercase r puzzles me too.
+app.controller('FabulousController', function ($scope, Restangular) {
+  Restangular.allUrl('users', 'http://localhost:3000/api/user').getList()
+    .then(function(users) {
+      $scope.users = users;
+    });
+});</code></pre>
+<div class="fragment" ng-controller="FabulousController">
+  <span ng-repeat="user in users">
+    <p>{{ user.username }} - {{user.id}}</p>
+  </span>
+  <!-- we tell angular which data model should be used for the input -->
+</div>
+        </section>
+        <section>
+          <p class="gatsby">The end. Thank you.</p>
         </section>
     </div>
 </div>
     <script src="bower_components/reveal.js/lib/js/head.min.js"></script>
     <script src="bower_components/reveal.js/js/reveal.min.js"></script>
+    <script src="bower_components/angular/angular.min.js"></script>
+    <script src="bower_components/lodash/dist/lodash.min.js"></script>
+    <script src="bower_components/restangular/dist/restangular.min.js"></script>
     <script>
+
+    var app = angular.module('thisWonderfulAppieApp', ['restangular']);
+    app.controller('FabulousController', function ($scope, Restangular) {
+      $scope.datamodel = {
+        example: 'data'
+      };
+      Restangular.allUrl('users', 'http://localhost:3000/api/user').getList()
+      .then(function(users) {
+        $scope.users = users;
+      });
+    });
 
       // Full list of configuration options available here:
       // https://github.com/hakimel/reveal.js#configuration
