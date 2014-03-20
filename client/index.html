@@ -42,15 +42,15 @@
       <div class="row">
         <div class="col-md-6">
           <ul>
-            <li ng-repeat="user in users" ng-click="moreInfo(user)" ng-bind="user.username">
-              <ul>
-               <li ng-repeat="bill in user.bills" ng-bind="bill.price"></li>
-             </ul>
+            <li ng-repeat="user in users" ng-click="moreInfo($index)" ng-bind="user.username">
             </li>
             </ul>
             <input type="text" ng-keypress="save()">
         </div>
         <div class="col-md-6">
+
+         <div ng-repeat="bill in users[activeUser].bills">
+          <input type="number" ng-model="bill.price" ng-change="save($index)">
         </div>
       </div>
     </div>

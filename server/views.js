@@ -41,6 +41,20 @@ var bill = {
 		.complete(function (err, bill) {
 			res.send(bill);
 		});
+	},
+	save: function (req, res) {
+		models['bill'].findOrCreate({id: req.params.id}, req.body)
+		.success(function (bill, created) {
+			if (!created) {
+				bill.price = req.body.price;
+				bill.save();	
+			}
+			res.send(bill);
+		})
+		.error(function (err) {
+			res.send('whoops');
+			console.info(err);
+		});
 	}
 }
 

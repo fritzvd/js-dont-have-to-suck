@@ -159,7 +159,7 @@ app.controller('FabulousController', function ($scope) {
 });</code></pre>
           <pre class="fragment"><code class="html">
 &lt;div ng-controller="FabulousController"&gt;
-  &cb;{{ datamodel.example }}
+  &#123;&#123;datamodel.example &#125;&#125;
 &lt;/div&gt;
 </code></pre>
         </section>
@@ -191,12 +191,25 @@ app.controller('FabulousController', function ($scope, Restangular) {
       $scope.users = users;
     });
 });</code></pre>
+    <pre><code class="html" ng-non-bindable>&lt;span ng-repeat="user in users"&gt;
+  &lt;p&gt;&#123;&#123; user.username &#125;&#125;  - &#123;&#123; user.id &#125;&#125;&lt;/p&gt;
+&lt;/span&gt;
+  </code></pre>
+
 <div class="fragment" ng-controller="FabulousController">
   <span ng-repeat="user in users">
     <p>{{ user.username }} - {{user.id}}</p>
   </span>
   <!-- we tell angular which data model should be used for the input -->
 </div>
+        </section>
+        <section>
+          <h2>Templating vs Data/Logic</h2>
+          <p>Angular seperates the data from the template, but leaves the templating to the template</p>
+              <pre class="fragment"><code class="html" ng-non-bindable>&lt;span ng-repeat="user in users"&gt;
+  &lt;p&gt;&#123;&#123; user.username &#125;&#125;  - &#123;&#123; user.id &#125;&#125;&lt;/p&gt;
+&lt;/span&gt;
+  </code></pre>
         </section>
         <section>
           <p class="gatsby">The end. Thank you.</p>
