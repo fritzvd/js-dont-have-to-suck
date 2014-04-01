@@ -8,7 +8,7 @@
     <meta name="apple-mobile-web-app-capable" content="yes" />
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
 
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, client-scalable=no">
 
     <link rel="stylesheet" href="bower_components/reveal.js/css/reveal.min.css">
     <link rel="stylesheet" href="bower_components/reveal.js/css/theme/moon.css" id="theme">
@@ -72,14 +72,6 @@
           </section>
         </section>
         <section>
-          TODO: 
-          Explain a bit about node.
-          Build server backend with sequelize and 
-          restify?
-          Build frontend with Angular/Bootstrap.
-          Test both back and front end.
-        </section>
-        <section>
           <h3>Node API backend</h3>
           <pre class="fragment" ><code class="bash"># This is similar to python setup.py install bin/buildout
 npm install
@@ -115,7 +107,7 @@ npm install
 node sync
 node fixture
 node runserver
-curl http://localhost:3000/api/user
+curl http://localhost:3000/api/client
 </code></pre>
         </section>
 
@@ -186,19 +178,20 @@ app.controller('FabulousController', function ($scope) {
 var app = angular.module('thisWonderfulAppieApp', ['restangular']);
 // why this is a capital R and lowercase r puzzles me too.
 app.controller('FabulousController', function ($scope, Restangular) {
-  Restangular.allUrl('users', 'http://localhost:3000/api/user').getList()
-    .then(function(users) {
-      $scope.users = users;
+  Restangular.allUrl('clients', 'http://localhost:3000/api/client')
+    .getList()
+    .then(function(clients) {
+      $scope.clients = clients;
     });
 });</code></pre>
-    <pre><code class="html" ng-non-bindable>&lt;span ng-repeat="user in users"&gt;
-  &lt;p&gt;&#123;&#123; user.username &#125;&#125;  - &#123;&#123; user.id &#125;&#125;&lt;/p&gt;
+    <pre><code class="html" ng-non-bindable>&lt;span ng-repeat="client in clients"&gt;
+  &lt;p&gt;&#123;&#123; client.name &#125;&#125;  - &#123;&#123; client.id &#125;&#125;&lt;/p&gt;
 &lt;/span&gt;
   </code></pre>
 
 <div class="fragment" ng-controller="FabulousController">
-  <span ng-repeat="user in users">
-    <p>{{ user.username }} - {{user.id}}</p>
+  <span ng-repeat="client in clients">
+    <p>{{ client.name }} - {{client.id}}</p>
   </span>
   <!-- we tell angular which data model should be used for the input -->
 </div>
@@ -209,17 +202,92 @@ app.controller('FabulousController', function ($scope, Restangular) {
         <section>
           <h2>Templating vs Data/Logic</h2>
           <p>Angular seperates the data from the template, but leaves the templating to the template</p>
-              <pre class="fragment"><code class="html" ng-non-bindable>&lt;span ng-repeat="user in users"&gt;
-  &lt;p&gt;&#123;&#123; user.username &#125;&#125;  - &#123;&#123; user.id &#125;&#125;&lt;/p&gt;
+              <pre class="fragment"><code class="html" ng-non-bindable>&lt;span ng-repeat="client in clients"&gt;
+  &lt;p&gt;&#123;&#123; client.name &#125;&#125;  - &#123;&#123; client.id &#125;&#125;&lt;/p&gt;
 &lt;/span&gt;
   </code></pre>
-    <span ng-repeat="user in users">
-    <p>{{ user.username }} - {{user.id}}</p>
+    <span ng-repeat="client in clients">
+    <p>{{ client.name }} - {{client.id}}</p>
   </span>
         </section>
         <section>
-          <h2>Testing</h2>
+          <section>
+            <h2>Testing with CLI</h2>
+            <pre><code class="bash"># all the things
+            grunt test
+            # seperately
+            grunt client
+            grunt server</code></pre>
+          </section>
+          <section>
+            <h2>Testing with Jasmine</h2>
+            <pre>
+              <code class="javascript">
+                // test spec.
+                describe('Main', function () {
+                  it('should', function () {
+                    expect(true).toBe(true);
+                  });
+                });
+              </code>
+            </pre>
+          </section>
+          <section>
+            <h2>Running the test</h2>
+            <pre><code class="javascript">'use strict';
+
+module.exports = function(grunt) {
+
+  grunt.initConfig({
+    jasmine: {
+      pivotal: {
+        src: 'client/assets/js/*.js',
+        specs: 'client/tests/test.js'
+        }
+      }
+    });
+  grunt.loadNpmTasks('grunt-contrib-jasmine');
+            </code></pre>
+            <pre><code class="bash">grunt jasmine</code></pre>
           
+          </section>
+          <section>
+            <pre>
+              <code class="javascript">
+                // test spec
+                describe('Main', function () {
+                  var scope, $httpBackend;
+
+                  beforeEach(module('billing', 
+                    'restangular'));
+                  beforeEach(inject(function ($rootScope) {
+                    scope = $rootScope.$new();
+                    $controller('Main', {$scope: scope});
+                  }));
+
+                  it('Should have a activeClient', function () {
+                    expect(scope.activeClient).toBe(0);
+                  });
+              </code>
+            </pre>
+          </section>
+          <section>
+            <pre>
+              <code class="javascript">
+              // Gruntfile.js
+                ....
+                pivotal: {
+                  src: 'client/assets/js/*.js',
+                  options: {
+                  vendor: [
+                  'client/bower_components/angular/angular.js',
+                  'client/bower_components/angular-mocks/angular-mocks.js',
+                  ],
+                  specs: 'client/tests/test.js'
+                ....
+              </code>
+            </pre>
+          </section>
         </section>
         <section>
           <p class="gatsby">The end. Thank you.</p>
@@ -238,9 +306,9 @@ app.controller('FabulousController', function ($scope, Restangular) {
       $scope.datamodel = {
         example: 'data'
       };
-      Restangular.allUrl('users', 'http://localhost:3000/api/user').getList()
-      .then(function(users) {
-        $scope.users = users;
+      Restangular.allUrl('clients', 'http://localhost:3000/api/client').getList()
+      .then(function(clients) {
+        $scope.clients = clients;
       });
     });
 
