@@ -47,5 +47,15 @@ describe('Server', function () {
 				done();
 			})
 	});
+
+	it('should return a list of bills', function (done) {
+		agent
+			.get('bill')
+			.end(function (err, res) {
+				if (err) return done(err);
+				expect(res.body.hasOwnProperty('length')).to.equal(true);
+				done();
+			})
+	});
 });
 
