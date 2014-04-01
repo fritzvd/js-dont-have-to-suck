@@ -1,30 +1,32 @@
 var models = require('./models');
 
 var pietje, henk, firstbill;
-models.user.create({
+models.client.create({
 	id: 3,
-	username: 'pietje',
+	name: 'pietje',
 	password: 'i-am-piet'
-}).complete(function (err, user) {
-	pietje = user;
+}).complete(function (err, client) {
+	pietje = client;
 	var firstbill = models.bill.create({
 	id: 1,
 	timestamp: Date.now(),
-	price: 30.00
+	title: 'REST API',
+	price: 30.00,
+	payed: false
 	}).complete(function (err, bill) {
 		console.info(pietje, bill)
 		pietje.setBills([bill])
 	});
-	// console.info(err, user);
+	// console.info(err, client);
 });
 
-models.user.create({
+models.client.create({
 	id: 1,
-	username: 'henk',
+	name: 'henk',
 	password: 'i-am-henk'
-}).complete(function (err, user) {
-	henk = user
-	// console.info(err, user);
+}).complete(function (err, client) {
+	henk = client
+	// console.info(err, client);
 });
 
 

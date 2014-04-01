@@ -1,8 +1,6 @@
 'use strict';
 
 module.exports = function(grunt) {
-  // require('load-grunt-tasks')(grunt);
-  // require('time-grunt')(grunt);
 
   grunt.initConfig({
   	jasmine: {
@@ -15,7 +13,9 @@ module.exports = function(grunt) {
           'client/bower_components/lodash/dist/lodash.js',
           'client/bower_components/restangular/dist/restangular.js',
           ],
-          specs: 'client/tests/*.js'
+          specs: [
+          'client/tests/*.js',
+          ]
   			}
   		},
   	},
@@ -24,15 +24,17 @@ module.exports = function(grunt) {
         options: {
           reporter: 'spec'
         },
-        require: [
-        'client/bower_components/angular/angular.min.js'
-        ],
-        src: ['client/tests/**/*.js']
+        src: ['server/tests/**/*.js']
       },
     }
   });
-  // grunt.loadNpmTasks('grunt-mocha-test');
+
+  grunt.loadNpmTasks('grunt-mocha-test');
   grunt.loadNpmTasks('grunt-contrib-jasmine');
-	grunt.registerTask('test', ['jasmine']);
+
+  grunt.registerTask('client', ['jasmine']);
+  grunt.registerTask('server', ['mochaTest']);
+  
+	grunt.registerTask('test', ['client', 'server']);
 
 };

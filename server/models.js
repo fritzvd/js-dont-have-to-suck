@@ -2,24 +2,27 @@
 var Sequelize = require('sequelize');
 var sequelize = new Sequelize('newdb', 'fritz', 'fritz', {
 	dialect: 'postgres',
-	port: 5432
+	port: 5432,
+	logging: false
 });
 
-var user = sequelize.define('User', {
-	username: Sequelize.STRING,
+var client = sequelize.define('Client', {
+	name: Sequelize.STRING,
 	password: Sequelize.STRING
 });
 
 var bill = sequelize.define('Bill',{
 	timestamp: Sequelize.DATE,
+	title: Sequelize.STRING,
+	payed: Sequelize.BOOLEAN,
 	price: Sequelize.FLOAT(11)
 });
 
-user.hasMany(bill);
-bill.hasMany(user);
+client.hasMany(bill);
+bill.hasMany(client);
 
 module.exports = {
-	user: user,
+	client: client,
 	bill: bill,
 	db: sequelize
 };

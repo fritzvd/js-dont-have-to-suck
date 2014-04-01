@@ -9,13 +9,13 @@ describe('Main', function () {
 	beforeEach(inject(function ($rootScope, $controller, _$httpBackend_) {
 		scope = $rootScope.$new();
 
-		var users = [
+		var client = [
 		{
-			username: 'henk',
+			name: 'henk',
 			id: 1
 		}];
 		var henk = {
-			username: 'henk',
+			name: 'henk',
 			id: 1,
 			bills: [{
 				price: 30.00
@@ -23,22 +23,22 @@ describe('Main', function () {
 		}
 		$controller('Main', {$scope: scope});
 		$httpBackend = _$httpBackend_;
-		$httpBackend.when('GET', 'http://localhost:3000/api/user').respond(users);
-		$httpBackend.when('GET', 'http://localhost:3000/api/user/1').respond(henk);
+		$httpBackend.when('GET', 'http://localhost:3000/api/client').respond(client);
+		$httpBackend.when('GET', 'http://localhost:3000/api/client/1').respond(henk);
 	}));
 
-	it('Should have a activeUser', function () {
-		expect(scope.activeUser).toBe(0);
+	it('Should have a activeClient', function () {
+		expect(scope.activeClient).toBe(0);
 	});
 
-	it('Should perform list API call retrieve users', function () {
+	it('Should perform list API call retrieve clients', function () {
 		// we flush the backend because otherwise we have to make
 		// async tests.
 		$httpBackend.flush();
 
 		// apply forces the app to do a digest loop.
 		scope.$apply(); 
-		expect(scope.users[0].username).toBe('henk');
+		expect(scope.clients[0].name).toBe('henk');
 	});
 
 	it('Should get specific API call on moreInfo', function () {
@@ -53,7 +53,7 @@ describe('Main', function () {
 		$httpBackend.flush();
 
 		scope.$digest();
-		var bills = scope.users[0].bills;
+		var bills = scope.clients[0].bills;
 		expect(bills[0].price).toBe(30);
 	});
 

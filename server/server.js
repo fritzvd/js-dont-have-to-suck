@@ -16,9 +16,14 @@ app.configure(function () {
 	app.use(app.router);
 });
 
-function start() {
+function start(port) {
+	if (port == undefined) {
+		port = 3000
+	}
 	routes.setup(app);
-	app.listen(3000);
+	app.listen(port);
 };
 
-start();
+module.exports = {
+	start: start
+};

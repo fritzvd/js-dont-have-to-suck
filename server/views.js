@@ -11,20 +11,20 @@ var primitives = {
 	}
 }
 
-var user = {
+var client = {
 	list: function (req, res, next) {
-		req.params.table = 'user';
+		req.params.table = 'client';
 		primitives.list(req, res, next);
 	},
 	one: function (req, res) {
-		var user;
-		models['user'].find(req.params.id)
-		.complete(function (err, user) {
+		var client;
+		models['client'].find(req.params.id)
+		.complete(function (err, client) {
 			var result = '';
-			user = user;
-			user.getBills().success(function (bills) {
-				user.values.bills = bills;
-				res.send(user);
+			client = client;
+			client.getBills().success(function (bills) {
+				client.values.bills = bills;
+				res.send(client);
 			});
 		});
 	}
@@ -47,6 +47,7 @@ var bill = {
 		.success(function (bill, created) {
 			if (!created) {
 				bill.price = req.body.price;
+				bill.payed = req.body.payed;
 				bill.save();	
 			}
 			res.send(bill);
@@ -59,6 +60,6 @@ var bill = {
 }
 
 module.exports = {
-	user: user,
+	client: client,
 	bill: bill
 };
