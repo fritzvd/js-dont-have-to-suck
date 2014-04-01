@@ -5,16 +5,18 @@ module.exports = function(grunt) {
   // require('time-grunt')(grunt);
 
   grunt.initConfig({
-  	mochaTest: {
-  		all: {
+  	jasmine: {
+  		pivotal: {
   			options: {
-  				reporter: 'spec'
+  				specs: '**/test/**/*.js',
+          vendor: 'bower_components/*'
   			},
-  			src: ['test/**/*.js']
+        src: ['client/**/*.js',
+            'server/**/*.js']
   		},
   	}
   });
-	grunt.loadNpmTasks('grunt-mocha-test');
+	grunt.loadNpmTasks('grunt-contrib-jasmine');
 	grunt.registerTask('test', ['mochaTest:all']);
 
 };

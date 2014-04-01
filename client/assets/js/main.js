@@ -2,8 +2,8 @@
 
 var app = angular.module('billing', ['restangular']);
 
-app.controller('Base', ["$scope", "Restangular", function ($scope, Restangular) {
-	// Restangular.oneUrl('users', 'http://localhost:3000/api/user')
+app.controller('Main', ["$scope", "Restangular", function ($scope, Restangular) {
+	Restangular.setErrorInterceptor(true);
 	Restangular.setBaseUrl('http://localhost:3000/api/');
 	Restangular.all('user').getList()
 		.then(function(users) {
@@ -22,14 +22,14 @@ app.controller('Base', ["$scope", "Restangular", function ($scope, Restangular) 
 
 	$scope.save = function ($index) {
 		var bill = $scope.users[$scope.activeUser].bills[$index];
-		console.info(bill);
-		// debugger
 		Restangular.one('bill', bill.id).get()
 			.then(function (serverBill) {
 				serverBill.price = bill.price;
-				// console.info(serverBill.price);
-				// debugger
 				serverBill.put({price: bill.price});
+				return serverBill;
+			}, function (things) {
+				console.info(things);
+				return bill;
 			});
 	}
 

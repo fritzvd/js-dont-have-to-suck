@@ -15,7 +15,7 @@
 
     <style>
     .gatsby {
-      background: url(assets/img/greatgatsby.gif);
+      background: url(assets/img/hooray.gif);
       width: 100%;
       height: 620px;
     }
@@ -157,7 +157,7 @@ app.controller('FabulousController', function ($scope) {
     example: 'data'
   };
 });</code></pre>
-          <pre class="fragment"><code class="html">
+          <pre class="fragment"><code class="html" ng-non-bindable>
 &lt;div ng-controller="FabulousController"&gt;
   &#123;&#123;datamodel.example &#125;&#125;
 &lt;/div&gt;
@@ -165,7 +165,7 @@ app.controller('FabulousController', function ($scope) {
         </section>
         <section>
           <h2>Data binding</h2>
-          <pre><code class="html">
+          <pre><code class="html" ng-non-bindable>
 &lt;div ng-controller="FabulousController"&gt;
   {{ datamodel.example }}
   <!-- we tell angular which data model should be used for the input -->
@@ -204,6 +204,9 @@ app.controller('FabulousController', function ($scope, Restangular) {
 </div>
         </section>
         <section>
+          <img src="assets/img/wolf-on-wallstreet-dance.gif" />
+        </section>
+        <section>
           <h2>Templating vs Data/Logic</h2>
           <p>Angular seperates the data from the template, but leaves the templating to the template</p>
               <pre class="fragment"><code class="html" ng-non-bindable>&lt;span ng-repeat="user in users"&gt;
@@ -213,6 +216,10 @@ app.controller('FabulousController', function ($scope, Restangular) {
     <span ng-repeat="user in users">
     <p>{{ user.username }} - {{user.id}}</p>
   </span>
+        </section>
+        <section>
+          <h2>Testing</h2>
+          
         </section>
         <section>
           <p class="gatsby">The end. Thank you.</p>

@@ -5,7 +5,8 @@ var routes = require('./urls');
 var app = express();
 app.configure(function () {
 	app.use(express.bodyParser());
-	// app.use(express.static(__dirname + '../client'));
+	app.use('/', express.static(__dirname + '/../client'));
+	app.use('/presentation', express.static(__dirname + '/../presentation'));
 	app.all('*', function(req, res, next) {
 	  res.header("Access-Control-Allow-Origin", "*");
       res.header('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE,OPTIONS');
