@@ -316,7 +316,7 @@ module.exports = function(grunt) {
     <script src="bower_components/restangular/dist/restangular.min.js"></script>
     <script>
 
-    var app = angular.module('thisWonderfulAppieApp', ['restangular', 'ngRoute']);
+    var app = angular.module('thisWonderfulAppieApp', ['restangular']);
     app.controller('FabulousController', function ($scope, Restangular) {
       $scope.datamodel = {
         example: 'data'
