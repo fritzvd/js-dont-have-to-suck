@@ -10,6 +10,10 @@ app.controller('Main', ["$scope", "Restangular", function ($scope, Restangular) 
 			$scope.clients = clients;
 		});
 
+	$scope.data = {
+		example: 'data'
+	}
+
 	$scope.moreInfo = function (idx) {
 		$scope.clients[idx].get()
 		.then(function(client) {

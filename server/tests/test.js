@@ -8,7 +8,7 @@ var expect = chai.expect;
 
 describe('Models', function () {
 	it('should expose the table names', function () {
-		expect(models.hasOwnProperty('client')).to.equal (true);
+		expect(models.hasOwnProperty('client')).to.equal(true);
 	})
 });
 
@@ -57,5 +57,30 @@ describe('Server', function () {
 				done();
 			})
 	});
+
+
+	it('should return a list of unpaid bills', function (done) {
+		agent
+			.get('bill/unpaid')
+			.end(function (err, res) {
+				if (err) return done(err);
+				expect(res.body.hasOwnProperty('length')).to.equal(true);
+				done();
+			})
+	});
+
+	it('should return a summary based on the date', function (done) {
+		agent
+			.get('bill/?start=2013&end=2014')
+			.end(function (err, res) {
+				if (err) return done(err);
+				var datewithin = new Date(res.body[0].timestamp);
+				var statement = ((datewithin.getFullYear() >= 2013) &&
+				 				 (datewithin.getFullYear() <= 2014));
+				expect(statement).to.equal(true);
+				done();
+			});
+	});
+
 });
 

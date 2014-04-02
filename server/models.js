@@ -14,7 +14,7 @@ var client = sequelize.define('Client', {
 var bill = sequelize.define('Bill',{
 	timestamp: Sequelize.DATE,
 	title: Sequelize.STRING,
-	payed: Sequelize.BOOLEAN,
+	paid: Sequelize.BOOLEAN,
 	price: Sequelize.FLOAT(11)
 });
 

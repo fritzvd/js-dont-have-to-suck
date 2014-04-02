@@ -33,7 +33,32 @@ var client = {
 var bill = {
 	list: function (req, res, next) {
 		req.params.table = 'bill';
-		primitives.list(req, res, next);
+		if (Object.keys(req.query).length > 0) {
+			var query = 'timestamp ';
+			if (req.query.hasOwnProperty('start')) {
+				var date = new Date(req.query.start);
+				query = query + "> '" + date.toISOString() + "'";
+			}
+			if (req.query.hasOwnProperty('start') && 
+				req.query.hasOwnProperty('end')) {
+				query = query + ' AND timestamp ';
+			}
+			if (req.query.hasOwnProperty('end')) {
+				var date = new Date(req.query.end);
+				query = query + "< '" + date.toISOString() + "'";
+			} 
+			models['bill'].findAll({
+				where: query
+			}).complete(function (err, bills) {
+				if (err) {
+					res.send(err);
+					return;
+				}
+				res.send(bills);
+			})
+		} else {
+			primitives.list(req, res, next);
+		}
 	},
 	one: function (req, res) {
 		var bill;
@@ -56,6 +81,14 @@ var bill = {
 			res.send('whoops');
 			console.info(err);
 		});
+	},
+	unpaid: function (req, res, next) {
+		var list;
+		models['bill'].findAll({where: {paid: false}})
+			.success(function (list) {
+				list = list;
+				res.send(list);
+			});
 	}
 }
 

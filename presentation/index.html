@@ -105,6 +105,7 @@ git clone https://github.com/fritzvd/js-dont-have-to-suck.git
           <h3>run the sucker</h3>
           <pre><code class="bash">### install and setup
 # you might need this:
+git clone https://github.com/fritzvd/js-dont-have-to-suck.git
 sudo apt-get install libfontconfig1-dev libfreetype6-dev curl
 npm install
 node sync
@@ -117,7 +118,7 @@ curl http://localhost:3000/api/client
 
         <section>
           <h1>front-end</h1>
-            <pre><code class="bash">sudo npm -g install bower
+            <pre><code class="bash">sudo npm -g install bower grunt-cli
 cd client/
 bower install
 ## to add stuff to bower.json
@@ -295,7 +296,7 @@ module.exports = function(grunt) {
         </section>
         <section>
           <h2>Make some failing tests</h2>
-          <img src="assets/img/fail3.gif" /><br>
+          <!-- <img src="assets/img/fail3.gif" /><br> -->
           <ul>
             <li class="fragment">API call for unpayed bills</li>
             <li class="fragment">Summing credit/debit</li>
@@ -310,12 +311,12 @@ module.exports = function(grunt) {
 </div>
     <script src="bower_components/reveal.js/lib/js/head.min.js"></script>
     <script src="bower_components/reveal.js/js/reveal.min.js"></script>
-    <script src="bower_components/angular/angular.min.js"></script>
+    <script src="bower_components/angular/angular.js"></script>
     <script src="bower_components/lodash/dist/lodash.min.js"></script>
     <script src="bower_components/restangular/dist/restangular.min.js"></script>
     <script>
 
-    var app = angular.module('thisWonderfulAppieApp', ['restangular']);
+    var app = angular.module('thisWonderfulAppieApp', ['restangular', 'ngRoute']);
     app.controller('FabulousController', function ($scope, Restangular) {
       $scope.datamodel = {
         example: 'data'
